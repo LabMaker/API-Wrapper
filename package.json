@@ -1,11 +1,12 @@
 {
   "name": "labmaker-api-wrapper",
-  "version": "1.0.3",
+  "version": "1.1.0",
   "description": "",
   "main": "lib/index.js",
   "scripts": {
     "build": "tsc",
-    "dev": "ts-node-dev --respawn ./src/index.ts"
+    "dev": "ts-node-dev --respawn ./src/index.ts",
+    "publish": "npm publish"
   },
   "keywords": [],
   "author": "",

@@ -1,10 +1,3 @@
-import { DiscordConfigAPI } from './DiscordConfig';
-
-const discordConfig = new DiscordConfigAPI();
-
-(async () => {
-  const data = await discordConfig.getAll();
-  console.log(data);
-})();
-
-export { DiscordConfigAPI };
+export { DiscordConfigAPI } from './DiscordConfig';
+export { TicketAPI } from './TicketConfig';
+export { GuildConfigDto, TicketDto, PaymentDto } from './types';

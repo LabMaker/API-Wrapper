@@ -13,7 +13,8 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "resolveJsonModule": true,
-    "importHelpers": true
+    "importHelpers": true,
+    "declaration": true
   },
   "include": ["src"],
   "exclude": ["node_modules", "**/*.spec.ts"]

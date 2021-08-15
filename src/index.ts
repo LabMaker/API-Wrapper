@@ -6,3 +6,5 @@ const discordConfig = new DiscordConfigAPI();
   const data = await discordConfig.getAll();
   console.log(data);
 })();
+
+export { DiscordConfigAPI };

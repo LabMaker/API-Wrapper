@@ -41,3 +41,14 @@ export class RedditConfigDto {
   subreddits: string[];
   forbiddenWords: string[];
 }
+
+export class LogDto {
+  _id: string;
+  nodeId: Number;
+  message: string;
+  subId: string;
+  username: string;
+  subreddit: string;
+  time: string;
+  pm: Boolean;
+}

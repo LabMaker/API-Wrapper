@@ -6,4 +6,9 @@
 export { DiscordConfigAPI } from './DiscordConfig';
 export { RedditConfigAPI } from './RedditConfig';
 export { TicketAPI } from './TicketConfig';
-export { GuildConfigDto, TicketDto, PaymentDto } from './types';
+export {
+  GuildConfigDto,
+  RedditConfigDto,
+  TicketDto,
+  PaymentDto,
+} from './types';

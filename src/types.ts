@@ -1,4 +1,4 @@
-export class GuildConfigDto {
+export type GuildConfigDto = {
   _id: string;
   paymentConfigId: string;
   prefix: string;
@@ -6,17 +6,17 @@ export class GuildConfigDto {
   autoSwitcher: Boolean;
   autoTicket: Boolean;
   autoReact: Boolean;
-}
+};
 
-export class PaymentDto {
+export type PaymentDto = {
   _id: string;
   nodeId: string;
   name: string;
   value: string;
   type: string;
-}
+};
 
-export class TicketDto {
+export type TicketDto = {
   _id: string;
   ticketId: string;
   serverId: string;
@@ -27,9 +27,9 @@ export class TicketDto {
   level: string;
   budget: string;
   submitted: Boolean;
-}
+};
 
-export class RedditConfigDto {
+export type RedditConfigDto = {
   _id: string;
   clientId: string;
   clientSecret: string;
@@ -41,9 +41,9 @@ export class RedditConfigDto {
   delay: number;
   subreddits: string[];
   forbiddenWords: string[];
-}
+};
 
-export class LogDto {
+export type LogDto = {
   _id: string;
   nodeId: string;
   message: string;
@@ -51,4 +51,4 @@ export class LogDto {
   username: string;
   subreddit: string;
   pm: Boolean;
-}
+};

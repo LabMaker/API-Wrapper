@@ -1,6 +1,6 @@
 export class GuildConfigDto {
   _id: string;
-  paymentConfigId: Number;
+  paymentConfigId: string;
   prefix: string;
   embedImageUrl: string;
   autoSwitcher: Boolean;
@@ -10,7 +10,7 @@ export class GuildConfigDto {
 
 export class PaymentDto {
   _id: string;
-  nodeId: Number;
+  nodeId: string;
   name: string;
   value: string;
   type: string;
@@ -18,7 +18,7 @@ export class PaymentDto {
 
 export class TicketDto {
   _id: string;
-  ticketId: Number;
+  ticketId: string;
   serverId: string;
   channelId: string;
   type: string;
@@ -44,7 +44,7 @@ export class RedditConfigDto {
 
 export class LogDto {
   _id: string;
-  nodeId: Number;
+  nodeId: string;
   message: string;
   subId: string;
   username: string;

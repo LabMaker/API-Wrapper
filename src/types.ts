@@ -38,6 +38,7 @@ export class RedditConfigDto {
   userAgent: string;
   title: string;
   pmBody: string;
+  delay: Number;
   subreddits: string[];
   forbiddenWords: string[];
 }

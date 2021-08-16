@@ -12,6 +12,12 @@ export class LogAPI extends API {
     return await this.get(url);
   }
 
+  async getSubmissionIds(nodeId: string): Promise<string[]> {
+    const url = this.getUrl + `submissions/${nodeId}`;
+
+    return await this.get(url);
+  }
+
   async create(createLogDto: LogDto): Promise<RedditConfigDto> {
     return await this.post(createLogDto);
   }

@@ -49,6 +49,5 @@ export class LogDto {
   subId: string;
   username: string;
   subreddit: string;
-  time: string;
   pm: Boolean;
 }

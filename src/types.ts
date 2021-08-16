@@ -28,3 +28,16 @@ export class TicketDto {
   budget: string;
   submitted: Boolean;
 }
+
+export class RedditConfigDto {
+  _id: string;
+  clientId: string;
+  clientSecret: string;
+  username: string;
+  password: string;
+  userAgent: string;
+  title: string;
+  pmBody: string;
+  subreddits: string[];
+  forbiddenWords: string[];
+}

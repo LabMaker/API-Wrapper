@@ -13,7 +13,9 @@ export class LogAPI extends API {
   }
 
   async getSubmissionIds(nodeId: string): Promise<string[]> {
-    const url = this.getUrl + `submissions/${nodeId}`;
+    const url = this.getUrl() + `submissions/${nodeId}`;
+
+    console.log(url);
 
     return await this.get(url);
   }

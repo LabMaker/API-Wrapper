@@ -6,7 +6,7 @@ export class LogAPI extends API {
     super('reddit/log');
   }
 
-  async getLogs(nodeId: string): Promise<LogDto> {
+  async getLogs(nodeId: string): Promise<LogDto[]> {
     const url = this.getUrl() + nodeId;
 
     return await this.get(url);

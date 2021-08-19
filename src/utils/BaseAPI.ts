@@ -1,7 +1,9 @@
 import axios from 'axios';
+import * as dotenv from 'dotenv';
+dotenv.config();
 
 export class API {
-  private APIUrl = 'http://localhost:3000';
+  private APIUrl = 'https://reddit-api-bot2.herokuapp.com';
 
   constructor(private APIBase: string) {
     this.APIUrl = `${this.APIUrl}/${this.APIBase}/`;
@@ -49,12 +51,12 @@ export class API {
     }
   }
 
-  protected async delete(url?: string): Promise<any> {
+  protected async delete(options: any, url?: string): Promise<any> {
     try {
       if (!url) {
-        return (await axios.delete(this.APIUrl)).data;
+        return (await axios.delete(this.APIUrl, { data: options })).data;
       } else {
-        return (await axios.delete(url)).data;
+        return (await axios.delete(url, { data: options })).data;
       }
     } catch (err) {
       console.error(err);

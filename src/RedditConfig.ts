@@ -19,4 +19,12 @@ export class RedditConfigAPI extends API {
   async update(updatedConfig: RedditConfigDto): Promise<RedditConfigDto> {
     return await this.put(updatedConfig);
   }
+
+  async updateMessage(
+    nodeId: string,
+    message: string
+  ): Promise<RedditConfigDto> {
+    const url = this.getUrl() + nodeId;
+    return await this.put({ pmBody: message }, url);
+  }
 }

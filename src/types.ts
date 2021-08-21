@@ -52,6 +52,6 @@ export type LogDto = {
   subId: string;
   username: string;
   subreddit: string;
-  createdAt: string;
+  createdAt?: string;
   pm: boolean;
 };

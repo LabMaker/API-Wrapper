@@ -2,8 +2,8 @@ import { API } from './utils/BaseAPI';
 import { RedditConfigDto } from './types';
 
 export class RedditConfigAPI extends API {
-  constructor() {
-    super('reddit/config');
+  constructor(apiUrl: string) {
+    super(`${apiUrl}/reddit/config/`);
   }
 
   async getOne(id: string): Promise<RedditConfigDto> {

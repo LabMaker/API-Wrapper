@@ -1,13 +1,12 @@
 import axios from 'axios';
 import * as dotenv from 'dotenv';
+
 dotenv.config();
 
 export class API {
-  private APIUrl = 'https://reddit-api-bot2.herokuapp.com';
+  //private APIUrl = 'https://reddit-api-bot2.herokuapp.com';
 
-  constructor(private APIBase: string) {
-    this.APIUrl = `${this.APIUrl}/${this.APIBase}/`;
-  }
+  constructor(private APIUrl: string) {}
 
   protected getUrl() {
     return this.APIUrl;

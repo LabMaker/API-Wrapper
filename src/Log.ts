@@ -2,8 +2,8 @@ import { API } from './utils/BaseAPI';
 import { LogDto, RedditConfigDto } from './types';
 
 export class LogAPI extends API {
-  constructor() {
-    super('reddit/log');
+  constructor(apiUrl: string) {
+    super(`${apiUrl}/reddit/log/`);
   }
 
   async getLogs(nodeId: string): Promise<LogDto[]> {

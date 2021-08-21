@@ -2,8 +2,8 @@ import { API } from './utils/BaseAPI';
 import { GuildConfigDto, PaymentDto } from './types';
 
 export class DiscordConfigAPI extends API {
-  constructor() {
-    super('discord/config');
+  constructor(apiUrl: string) {
+    super(`${apiUrl}/discord/config/`);
   }
 
   async getAll(): Promise<GuildConfigDto[]> {
@@ -35,21 +35,21 @@ export class DiscordConfigAPI extends API {
 
   async createPayments(payments: PaymentDto[]): Promise<PaymentDto[] | any> {
     const url =
-      this.getUrl().substring(0, this.getUrl().length - 7) + `payment/`;
+      this.getUrl().substring(0, this.getUrl().length - 7) + 'payment/';
 
     return await this.post(payments, url);
   }
 
   async updatePayments(payments: PaymentDto[]): Promise<PaymentDto[] | any> {
     const url =
-      this.getUrl().substring(0, this.getUrl().length - 7) + `payment/`;
+      this.getUrl().substring(0, this.getUrl().length - 7) + 'payment/';
 
     return await this.put(payments, url);
   }
 
   async deletePayments(paymentId: string[]): Promise<PaymentDto[] | any> {
     const url =
-      this.getUrl().substring(0, this.getUrl().length - 7) + `payment/`;
+      this.getUrl().substring(0, this.getUrl().length - 7) + 'payment/';
 
     return await this.delete(paymentId, url);
   }

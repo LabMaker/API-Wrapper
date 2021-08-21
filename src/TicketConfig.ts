@@ -2,8 +2,8 @@ import { API } from './utils/BaseAPI';
 import { TicketDto } from './types';
 
 export class TicketAPI extends API {
-  constructor() {
-    super('discord/ticket');
+  constructor(apiUrl: string) {
+    super(`${apiUrl}/discord/ticket/`);
   }
 
   async getOne(serverId: string, ticketId: string): Promise<TicketDto> {

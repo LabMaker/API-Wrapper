@@ -3,17 +3,19 @@ export type GuildConfigDto = {
   paymentConfigId: string;
   prefix: string;
   embedImageUrl: string;
-  autoSwitcher: Boolean;
-  autoTicket: Boolean;
-  autoReact: Boolean;
+  autoSwitcher: boolean;
+  autoTicket: boolean;
+  autoReact: boolean;
 };
 
 export type PaymentDto = {
-  _id: string;
+  _id?: string;
   nodeId: string;
   name: string;
   value: string;
   type: string;
+  newPayment?: boolean;
+  deletedPayment?: boolean;
 };
 
 export type TicketDto = {
@@ -26,7 +28,7 @@ export type TicketDto = {
   time: string;
   level: string;
   budget: string;
-  submitted: Boolean;
+  submitted: boolean;
 };
 
 export type RedditConfigDto = {
@@ -50,5 +52,6 @@ export type LogDto = {
   subId: string;
   username: string;
   subreddit: string;
-  pm: Boolean;
+  createdAt: string;
+  pm: boolean;
 };

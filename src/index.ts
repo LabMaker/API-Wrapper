@@ -9,14 +9,7 @@ export { RedditConfigAPI } from './RedditConfig';
 export { TicketAPI } from './TicketConfig';
 export { LogAPI } from './Log';
 
-// export class LabmakerAPI {
-//   public Discord = new DiscordConfigAPI();
-//   public Log = new LogAPI();
-//   public Reddit = new RedditConfigAPI();
-//   public Ticket = new TicketAPI();
-// }
-
-// //Testing
+//Testing
 // (async () => {
 //   const discordAPI = new DiscordConfigAPI();
 //   const data = await discordAPI.getOne('863423914230546462');

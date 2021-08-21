@@ -3,29 +3,23 @@
  *  Make use of Args inside other API calls.
  *  Only Export API-MAIN not other Classes. */
 
-import { LogAPI } from './Log';
-
+export * from './types';
 export { DiscordConfigAPI } from './DiscordConfig';
 export { RedditConfigAPI } from './RedditConfig';
 export { TicketAPI } from './TicketConfig';
 export { LogAPI } from './Log';
-import * as dotenv from 'dotenv';
-dotenv.config();
 
-//Testing
-(async () => {
-  const logAPI = new LogAPI();
-  const data = await logAPI.getSubmissionIds(
-    'a19050a0-adff-464f-9c10-401e5ff601cb'
-  );
+// export class LabmakerAPI {
+//   public Discord = new DiscordConfigAPI();
+//   public Log = new LogAPI();
+//   public Reddit = new RedditConfigAPI();
+//   public Ticket = new TicketAPI();
+// }
 
-  console.log(data);
-})();
+// //Testing
+// (async () => {
+//   const discordAPI = new DiscordConfigAPI();
+//   const data = await discordAPI.getOne('863423914230546462');
 
-export {
-  GuildConfigDto,
-  RedditConfigDto,
-  TicketDto,
-  PaymentDto,
-  LogDto,
-} from './types';
+//   console.log(data);
+// })();

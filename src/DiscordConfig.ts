@@ -17,8 +17,7 @@ export class DiscordConfigAPI extends API {
   }
 
   async create(_id: string): Promise<GuildConfigDto> {
-    const paymentConfigId = 0;
-
+    const paymentConfigId = '0';
     return await this.post({ _id, paymentConfigId });
   }
 
@@ -37,9 +36,6 @@ export class DiscordConfigAPI extends API {
   async createPayments(payments: PaymentDto[]): Promise<PaymentDto[] | any> {
     const url =
       this.getUrl().substring(0, this.getUrl().length - 7) + `payment/`;
-
-    console.log(url);
-    console.log(payments);
 
     return await this.post(payments, url);
   }

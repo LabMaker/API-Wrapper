@@ -4,8 +4,6 @@ import * as dotenv from 'dotenv';
 dotenv.config();
 
 export class API {
-  //private APIUrl = 'https://reddit-api-bot2.herokuapp.com';
-
   constructor(private APIUrl: string) {}
 
   protected getUrl() {

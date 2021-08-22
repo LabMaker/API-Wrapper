@@ -43,6 +43,7 @@ export type RedditConfigDto = {
   delay: number;
   subreddits: string[];
   forbiddenWords: string[];
+  blockedUsers: string[];
 };
 
 export type LogDto = {

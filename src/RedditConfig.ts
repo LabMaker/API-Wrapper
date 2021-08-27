@@ -27,4 +27,10 @@ export class RedditConfigAPI extends API {
     const url = this.getUrl() + nodeId;
     return await this.put({ pmBody: message }, url);
   }
+
+  async deleteConfig(nodeId: string): Promise<any> {
+    const url = this.getUrl() + nodeId;
+
+    return await this.delete({}, url);
+  }
 }

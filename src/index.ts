@@ -3,11 +3,11 @@
  *  Make use of Args inside other API calls.
  *  Only Export API-MAIN not other Classes. */
 
-import axios from 'axios';
 import { DiscordConfigAPI } from './DiscordConfig';
 import { LogAPI } from './Log';
 import { RedditConfigAPI } from './RedditConfig';
 import { TicketAPI } from './TicketConfig';
+import { UserAPI } from './User';
 import { API } from './utils/BaseAPI';
 import { refreshToken } from './utils/refreshToken';
 
@@ -18,12 +18,13 @@ export { TicketAPI } from './TicketConfig';
 export { LogAPI } from './Log';
 
 export default class LabmakerAPI {
-  // private static API = 'https://reddit-api-bot2.herokuapp.com';
   constructor(private apiURL: string) {}
+
   public Discord = new DiscordConfigAPI(this.apiURL);
   public Log = new LogAPI(this.apiURL);
   public Reddit = new RedditConfigAPI(this.apiURL);
   public Ticket = new TicketAPI(this.apiURL);
+  public User = new UserAPI(this.apiURL);
 
   public async refreshAccesToken() {
     const url = `${this.apiURL}/auth/refresh_token`;
@@ -34,12 +35,8 @@ export default class LabmakerAPI {
   public loginURL() {
     return `${this.apiURL}/auth/login`;
   }
+
+  public setAccessToken(s: string) {
+    API.accessToken = s;
+  }
 }
-
-//Testing
-// (async () => {
-//   const discordAPI = new DiscordConfigAPI();
-//   const data = await discordAPI.getOne('863423914230546462');
-
-//   console.log(data);
-// })();

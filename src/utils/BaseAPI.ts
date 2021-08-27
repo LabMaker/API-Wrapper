@@ -81,7 +81,7 @@ axios.interceptors.response.use(
 
     if (err.response.status === 401 && refreshExpired) {
       return Promise.reject(err);
-    } else {
+    } else if (err.response.status === 401) {
       originalRequest._retry = true;
       await refreshToken('http://localhost:3000/auth/refresh_token');
       return axios(originalRequest);

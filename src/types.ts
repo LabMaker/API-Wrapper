@@ -56,3 +56,11 @@ export type LogDto = {
   createdAt?: string;
   pm: boolean;
 };
+
+export type UserDto = {
+  _id: string;
+  username: string;
+  discriminator: string;
+  avatar: string;
+  nodes: string[];
+};

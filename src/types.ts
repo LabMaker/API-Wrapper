@@ -1,5 +1,7 @@
 export type GuildConfigDto = {
   _id: string;
+  name: string;
+  icon: string | null;
   paymentConfigId: string;
   prefix: string;
   embedImageUrl: string;
@@ -61,6 +63,16 @@ export type UserDto = {
   _id: string;
   username: string;
   discriminator: string;
-  avatar: string;
+  avatar: string | null;
   nodes: string[];
+};
+
+export type Guild = {
+  id: string;
+  name: string;
+  icon: string;
+  owner: boolean;
+  permissions: string;
+  features: string[];
+  joined: boolean;
 };

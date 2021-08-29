@@ -3,7 +3,9 @@
  *  Make use of Args inside other API calls.
  *  Only Export API-MAIN not other Classes. */
 
+import axios from 'axios';
 import { DiscordConfigAPI } from './DiscordConfig';
+import { GuildsAPI } from './Guilds';
 import { LogAPI } from './Log';
 import { RedditConfigAPI } from './RedditConfig';
 import { TicketAPI } from './TicketConfig';
@@ -21,6 +23,7 @@ export default class LabmakerAPI {
   constructor(private apiURL: string) {}
 
   public Discord = new DiscordConfigAPI(this.apiURL);
+  public Guild = new GuildsAPI(this.apiURL);
   public Log = new LogAPI(this.apiURL);
   public Reddit = new RedditConfigAPI(this.apiURL);
   public Ticket = new TicketAPI(this.apiURL);
@@ -39,4 +42,13 @@ export default class LabmakerAPI {
   public setAccessToken(s: string) {
     API.accessToken = s;
   }
+
+  public async fetchUserAvatar(s: string) {
+    const page = axios.get(`https://www.reddit.com/user/${s}`);
+    console.log(page);
+  }
 }
+
+// async () => {
+
+// }

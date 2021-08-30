@@ -19,7 +19,7 @@ export class TicketAPI extends API {
 
   async create(
     serverId: string,
-    ticketId: Number,
+    ticketId: string,
     channelId: string
   ): Promise<TicketDto | any> {
     const options = { serverId, ticketId, channelId };

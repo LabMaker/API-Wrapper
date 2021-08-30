@@ -7,10 +7,10 @@ import { refreshToken } from './refreshToken';
 dotenv.config();
 
 enum Methods {
-  Get = 'Get',
-  Post = 'Post',
-  Put = 'Put',
-  Delete = 'Delete',
+  Get = 'GET',
+  Post = 'POST',
+  Put = 'PUT',
+  Delete = 'DELETE',
 }
 
 export class API {
@@ -29,61 +29,49 @@ export class API {
   }
 
   protected async get(url?: string): Promise<any> {
-    try {
-      if (!url) {
-        this.LogCalls(this.APIUrl, Methods.Get);
-        return (await axios.get(this.APIUrl)).data;
-      }
+    const endpoint = url ? url : this.APIUrl;
 
-      this.LogCalls(url, Methods.Get);
-      return (await axios.get(url)).data;
+    try {
+      this.LogCalls(endpoint, Methods.Get);
+      return (await axios.get(endpoint)).data;
     } catch (err) {
-      console.error(err.message);
+      console.error(`${Methods.Get} ${err.message} at ${endpoint}`);
       return null;
     }
   }
 
   protected async post(options: any, url?: string): Promise<any> {
-    try {
-      if (!url) {
-        this.LogCalls(this.APIUrl, Methods.Post);
-        return (await axios.post(this.APIUrl, options)).data;
-      }
+    const endpoint = url ? url : this.APIUrl;
 
-      this.LogCalls(url, Methods.Post);
-      return (await axios.post(url, options)).data;
+    try {
+      this.LogCalls(endpoint, Methods.Post);
+      return (await axios.post(endpoint, options)).data;
     } catch (err) {
-      console.error(err.message);
+      console.error(`${Methods.Post} ${err.message} at ${endpoint}`);
       return null;
     }
   }
 
   protected async put(options: any, url?: string): Promise<any> {
-    try {
-      if (!url) {
-        this.LogCalls(this.APIUrl, Methods.Put);
-        return (await axios.put(this.APIUrl, options)).data;
-      }
+    const endpoint = url ? url : this.APIUrl;
 
-      this.LogCalls(url, Methods.Put);
-      return await axios.put(url, options);
+    try {
+      this.LogCalls(endpoint, Methods.Put);
+      return (await axios.put(endpoint, options)).data;
     } catch (err) {
-      console.error(err.message);
+      console.error(`${Methods.Put} ${err.message} at ${endpoint}`);
       return null;
     }
   }
 
   protected async delete(options: any, url?: string): Promise<any> {
-    try {
-      if (!url) {
-        this.LogCalls(this.APIUrl, Methods.Delete);
-        return (await axios.delete(this.APIUrl, { data: options })).data;
-      }
+    const endpoint = url ? url : this.APIUrl;
 
-      this.LogCalls(url, Methods.Delete);
-      return (await axios.delete(url, { data: options })).data;
+    try {
+      this.LogCalls(endpoint, Methods.Delete);
+      return (await axios.delete(endpoint, { data: options })).data;
     } catch (err) {
-      console.error(err);
+      console.error(`${Methods.Delete} ${err.message} at ${endpoint}`);
       return null;
     }
   }

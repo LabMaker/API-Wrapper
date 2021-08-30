@@ -45,6 +45,8 @@ export default class LabmakerAPI {
   }
 
   public setAccessToken(s: string) {
+    if (!s) return;
+
     API.accessToken = s;
   }
 
@@ -53,7 +55,3 @@ export default class LabmakerAPI {
     console.log(page);
   }
 }
-
-// async () => {
-
-// }

@@ -9,6 +9,7 @@ import { GuildsAPI } from './Guilds';
 import { LogAPI } from './Log';
 import { RedditConfigAPI } from './RedditConfig';
 import { TicketAPI } from './TicketConfig';
+import { APIOptions } from './types';
 import { UserAPI } from './User';
 import { API } from './utils/BaseAPI';
 import { refreshToken } from './utils/refreshToken';
@@ -20,7 +21,11 @@ export { TicketAPI } from './TicketConfig';
 export { LogAPI } from './Log';
 
 export default class LabmakerAPI {
-  constructor(private apiURL: string) {}
+  constructor(private apiURL: string, private options?: APIOptions) {
+    if (this.options) {
+      API.options = this.options;
+    }
+  }
 
   public Discord = new DiscordConfigAPI(this.apiURL);
   public Guild = new GuildsAPI(this.apiURL);

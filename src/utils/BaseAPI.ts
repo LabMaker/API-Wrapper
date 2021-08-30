@@ -1,24 +1,42 @@
 import axios from 'axios';
 import * as dotenv from 'dotenv';
+import { urlToHttpOptions } from 'url';
+import { APIOptions } from '../types';
 import { refreshToken } from './refreshToken';
 
 dotenv.config();
 
+enum Methods {
+  Get = 'Get',
+  Post = 'Post',
+  Put = 'Put',
+  Delete = 'Delete',
+}
+
 export class API {
   static accessToken = '';
+  static options: APIOptions = { debug: false };
   constructor(private APIUrl: string) {}
 
   protected getUrl() {
     return this.APIUrl;
   }
 
+  private LogCalls(url: string, type: Methods) {
+    if (!API.options.debug) return;
+
+    console.log(`Sending a ${type} Request to ${url}`);
+  }
+
   protected async get(url?: string): Promise<any> {
     try {
       if (!url) {
+        this.LogCalls(this.APIUrl, Methods.Get);
         return (await axios.get(this.APIUrl)).data;
-      } else {
-        return (await axios.get(url)).data;
       }
+
+      this.LogCalls(url, Methods.Get);
+      return (await axios.get(url)).data;
     } catch (err) {
       console.error(err.message);
       return null;
@@ -28,10 +46,12 @@ export class API {
   protected async post(options: any, url?: string): Promise<any> {
     try {
       if (!url) {
+        this.LogCalls(this.APIUrl, Methods.Post);
         return (await axios.post(this.APIUrl, options)).data;
-      } else {
-        return (await axios.post(url, options)).data;
       }
+
+      this.LogCalls(url, Methods.Post);
+      return (await axios.post(url, options)).data;
     } catch (err) {
       console.error(err.message);
       return null;
@@ -41,8 +61,11 @@ export class API {
   protected async put(options: any, url?: string): Promise<any> {
     try {
       if (!url) {
+        this.LogCalls(this.APIUrl, Methods.Put);
         return (await axios.put(this.APIUrl, options)).data;
       }
+
+      this.LogCalls(url, Methods.Put);
       return await axios.put(url, options);
     } catch (err) {
       console.error(err.message);
@@ -53,10 +76,12 @@ export class API {
   protected async delete(options: any, url?: string): Promise<any> {
     try {
       if (!url) {
+        this.LogCalls(this.APIUrl, Methods.Delete);
         return (await axios.delete(this.APIUrl, { data: options })).data;
-      } else {
-        return (await axios.delete(url, { data: options })).data;
       }
+
+      this.LogCalls(url, Methods.Delete);
+      return (await axios.delete(url, { data: options })).data;
     } catch (err) {
       console.error(err);
       return null;

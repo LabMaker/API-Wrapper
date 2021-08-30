@@ -76,3 +76,7 @@ export type Guild = {
   features: string[];
   joined: boolean;
 };
+
+export type APIOptions = {
+  debug?: boolean;
+};

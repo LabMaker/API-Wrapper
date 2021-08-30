@@ -12,6 +12,10 @@ export class RedditConfigAPI extends API {
     return await this.get(url);
   }
 
+  async getAll(): Promise<RedditConfigDto[]> {
+    return await this.get();
+  }
+
   async create(createConfigDto: RedditConfigDto): Promise<RedditConfigDto> {
     return await this.post(createConfigDto);
   }

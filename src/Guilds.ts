@@ -9,4 +9,10 @@ export class GuildsAPI extends API {
   async Guilds(): Promise<Guild[]> {
     return await this.get();
   }
+
+  async Config(serverId: string): Promise<any> {
+    const url = this.getUrl() + serverId;
+
+    return await this.get(url);
+  }
 }

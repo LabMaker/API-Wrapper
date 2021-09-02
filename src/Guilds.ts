@@ -3,7 +3,7 @@ import { Guild, LogDto, RedditConfigDto } from './types';
 
 export class GuildsAPI extends API {
   constructor(apiUrl: string) {
-    super(`${apiUrl}/discord/guilds`);
+    super(`${apiUrl}/discord/guilds/`);
   }
 
   async Guilds(): Promise<Guild[]> {

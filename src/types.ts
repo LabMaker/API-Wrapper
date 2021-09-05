@@ -12,7 +12,7 @@ export type GuildConfigDto = {
 
 export type PaymentDto = {
   _id?: string;
-  nodeId: string;
+  serverId: string;
   name: string;
   value: string;
   type: string;

@@ -34,7 +34,7 @@ export class API {
     try {
       this.LogCalls(endpoint, Methods.Get);
       return (await axios.get(endpoint)).data;
-    } catch (err) {
+    } catch (err: any) {
       console.error(`${Methods.Get} ${err.message} at ${endpoint}`);
       return null;
     }
@@ -46,7 +46,7 @@ export class API {
     try {
       this.LogCalls(endpoint, Methods.Post);
       return (await axios.post(endpoint, options)).data;
-    } catch (err) {
+    } catch (err: any) {
       console.error(`${Methods.Post} ${err.message} at ${endpoint}`);
       return null;
     }
@@ -58,7 +58,7 @@ export class API {
     try {
       this.LogCalls(endpoint, Methods.Put);
       return (await axios.put(endpoint, options)).data;
-    } catch (err) {
+    } catch (err: any) {
       console.error(`${Methods.Put} ${err.message} at ${endpoint}`);
       return null;
     }
@@ -70,7 +70,7 @@ export class API {
     try {
       this.LogCalls(endpoint, Methods.Delete);
       return (await axios.delete(endpoint, { data: options })).data;
-    } catch (err) {
+    } catch (err: any) {
       console.error(`${Methods.Delete} ${err.message} at ${endpoint}`);
       return null;
     }

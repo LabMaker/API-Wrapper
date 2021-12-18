@@ -20,6 +20,29 @@ export type PaymentDto = {
   deletedPayment?: boolean;
 };
 
+export type CreateOrderDto = {
+  /**
+   * URL to checkout.
+   */
+  url: string;
+
+  /**
+   * Payment breakdown (fees, gross, net profit)
+   */
+  breakdown: CreateOrderBreakdownDto;
+};
+
+export type CreateOrderBreakdownDto = {
+  fee: CreateOrderBreakdownAmountDto;
+  gross: CreateOrderBreakdownAmountDto;
+  net: CreateOrderBreakdownAmountDto;
+};
+
+export type CreateOrderBreakdownAmountDto = {
+  value: string;
+  currencyCode: string;
+};
+
 export type TicketDto = {
   _id: string;
   ticketId: string;

@@ -11,6 +11,7 @@ import { RedditConfigAPI } from './RedditConfig';
 import { TicketAPI } from './TicketConfig';
 import { APIOptions } from './types';
 import { UserAPI } from './User';
+import { PayAPI } from './Pay';
 import { API } from './utils/BaseAPI';
 import { refreshToken } from './utils/refreshToken';
 
@@ -19,6 +20,7 @@ export { DiscordConfigAPI } from './DiscordConfig';
 export { RedditConfigAPI } from './RedditConfig';
 export { TicketAPI } from './TicketConfig';
 export { LogAPI } from './Log';
+export { PayAPI } from './Pay';
 
 export default class LabmakerAPI {
   constructor(private apiURL: string, private options?: APIOptions) {
@@ -33,6 +35,7 @@ export default class LabmakerAPI {
   public Reddit = new RedditConfigAPI(this.apiURL);
   public Ticket = new TicketAPI(this.apiURL);
   public User = new UserAPI(this.apiURL);
+  public Pay = new PayAPI(this.apiURL);
 
   public async refreshAccesToken() {
     const url = `${this.apiURL}/auth/refresh_token`;

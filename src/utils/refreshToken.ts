@@ -14,7 +14,7 @@ export const refreshToken = async (url: string) => {
     const data = (await transport.post(url)).data;
     API.accessToken = data.accessToken;
     return data;
-  } catch (err) {
+  } catch (err: any) {
     console.error(err.message);
     return null;
   }

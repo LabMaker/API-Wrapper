@@ -25,6 +25,10 @@ export default class LabmakerAPI {
     if (this.options) {
       API.options = this.options;
     }
+
+    if (this.apiURL.endsWith('/')) {
+      this.apiURL = this.apiURL.slice(0, this.apiURL.length - 2);
+    }
   }
 
   public Discord = new DiscordConfigAPI(this.apiURL);

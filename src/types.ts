@@ -22,6 +22,11 @@ export type PaymentDto = {
 
 export type CreateOrderDto = {
   /**
+   * ID to ticket relating to payment.
+   */
+  ticketId: string;
+
+  /**
    * URL to checkout.
    */
   url: string;

@@ -1,14 +1,14 @@
 export type GuildConfigDto = {
   id: string;
   name: string;
-  icon: string | null;
+  icon?: string;
   prefix: string;
   embedImageUrl: string;
   autoSwitcher: boolean;
   autoTicket: boolean;
   autoReact: boolean;
   paymentConfigId: string;
-  tickets: TicketDto[] | null;
+  tickets?: TicketDto[];
 };
 
 export type PaymentDto = {
@@ -23,7 +23,7 @@ export type PaymentDto = {
 
 export type TicketDto = {
   id: number;
-  ticketId: number;
+  ticketId: string;
   serverId: string;
   channelId: string;
   type: string;
@@ -49,6 +49,7 @@ export type RedditConfigDto = {
   blockedUsers: string[];
   userId: string;
   creator?: UserDto;
+  logs?: LogDto[];
   delay: number;
 };
 
@@ -69,7 +70,7 @@ export type UserDto = {
   username: string;
   discriminator: string;
   avatar?: string;
-  nodes: string[];
+  nodes: RedditConfigDto[];
 };
 
 export type Guild = {

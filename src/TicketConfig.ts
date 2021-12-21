@@ -6,7 +6,7 @@ export class TicketAPI extends API {
     super(`${apiUrl}/discord/ticket/`);
   }
 
-  async getOne(serverId: string, ticketId: string): Promise<TicketDto> {
+  async getOne(serverId: string, ticketId: number): Promise<TicketDto> {
     const url = this.getUrl();
     const updatedUrl = `${url}${serverId}/${ticketId}`;
     return await this.get(updatedUrl);
@@ -19,7 +19,7 @@ export class TicketAPI extends API {
 
   async create(
     serverId: string,
-    ticketId: string,
+    ticketId: number,
     channelId: string
   ): Promise<TicketDto | any> {
     const options = { serverId, ticketId, channelId };
@@ -30,7 +30,7 @@ export class TicketAPI extends API {
     return await this.put(updatedTicket);
   }
 
-  async delete(ticketId: string): Promise<TicketDto | any> {
+  async deleteTicket(ticketId: number): Promise<TicketDto | any> {
     const url = this.getUrl() + ticketId;
     return await this.delete(url);
   }

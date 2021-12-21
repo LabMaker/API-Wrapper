@@ -25,10 +25,10 @@ export class DiscordConfigAPI extends API {
     return await this.put(updatedConfig);
   }
 
-  async getPayments(nodeId: string): Promise<PaymentDto[]> {
+  async getPayments(paymentId: number): Promise<PaymentDto[]> {
     const url =
       this.getUrl().substring(0, this.getUrl().length - 7) +
-      `payment/${nodeId}`;
+      `payment/${paymentId}`;
 
     return await this.get(url);
   }
@@ -47,7 +47,7 @@ export class DiscordConfigAPI extends API {
     return await this.put(payments, url);
   }
 
-  async deletePayments(paymentId: string[]): Promise<PaymentDto[] | any> {
+  async deletePayments(paymentId: number[]): Promise<PaymentDto[] | any> {
     const url =
       this.getUrl().substring(0, this.getUrl().length - 7) + 'payment/';
 

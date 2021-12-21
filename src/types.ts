@@ -12,10 +12,11 @@ export type GuildConfigDto = {
 };
 
 export type PaymentDto = {
-  id?: string;
+  id?: number;
   name: string;
   value: string;
   type: string;
+  serverId: string;
   newPayment?: boolean;
   deletedPayment?: boolean;
 };
@@ -52,7 +53,7 @@ export type RedditConfigDto = {
 };
 
 export type LogDto = {
-  _id: number;
+  id: number;
   nodeId: number;
   message: string;
   subId: string;

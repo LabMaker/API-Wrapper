@@ -6,13 +6,13 @@ export class LogAPI extends API {
     super(`${apiUrl}/reddit/log/`);
   }
 
-  async getLogs(nodeId: string): Promise<LogDto[]> {
+  async getLogs(nodeId: number): Promise<LogDto[]> {
     const url = this.getUrl() + nodeId;
 
     return await this.get(url);
   }
 
-  async getSubmissionIds(nodeId: string): Promise<string[]> {
+  async getSubmissionIds(nodeId: number): Promise<string[]> {
     const url = this.getUrl() + `submissions/${nodeId}`;
 
     return await this.get(url);

@@ -6,7 +6,7 @@ export class RedditConfigAPI extends API {
     super(`${apiUrl}/reddit/config/`);
   }
 
-  async getOne(id: string): Promise<RedditConfigDto> {
+  async getOne(id: number): Promise<RedditConfigDto> {
     const url = this.getUrl() + id;
 
     return await this.get(url);
@@ -25,14 +25,14 @@ export class RedditConfigAPI extends API {
   }
 
   async updateMessage(
-    nodeId: string,
+    nodeId: number,
     message: string
   ): Promise<RedditConfigDto> {
     const url = this.getUrl() + nodeId;
     return await this.put({ pmBody: message }, url);
   }
 
-  async deleteConfig(nodeId: string): Promise<any> {
+  async deleteConfig(nodeId: number): Promise<any> {
     const url = this.getUrl() + nodeId;
 
     return await this.delete({}, url);

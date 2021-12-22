@@ -5,7 +5,6 @@ export class DiscordConfigAPI extends API {
   constructor(apiUrl: string) {
     super(`${apiUrl}/discord/config/`);
   }
-
   async getAll(): Promise<GuildConfigDto[]> {
     return await this.get();
   }
@@ -16,19 +15,19 @@ export class DiscordConfigAPI extends API {
     return await this.get(url);
   }
 
-  async create(_id: string): Promise<GuildConfigDto> {
-    const paymentConfigId = '0';
-    return await this.post({ _id, paymentConfigId });
+  async create(id: string): Promise<GuildConfigDto> {
+    const paymentConfigId = id;
+    return await this.post({ id, paymentConfigId });
   }
 
   async update(updatedConfig: GuildConfigDto): Promise<GuildConfigDto> {
     return await this.put(updatedConfig);
   }
 
-  async getPayments(paymentId: number): Promise<PaymentDto[]> {
+  async getPayments(paymentConfigId: string): Promise<PaymentDto[]> {
     const url =
       this.getUrl().substring(0, this.getUrl().length - 7) +
-      `payment/${paymentId}`;
+      `payment/${paymentConfigId}`;
 
     return await this.get(url);
   }
@@ -37,7 +36,7 @@ export class DiscordConfigAPI extends API {
     const url =
       this.getUrl().substring(0, this.getUrl().length - 7) + 'payment/';
 
-    return await this.post(payments, url);
+    return await this.post({ payments: payments }, url);
   }
 
   async updatePayments(payments: PaymentDto[]): Promise<PaymentDto[] | any> {

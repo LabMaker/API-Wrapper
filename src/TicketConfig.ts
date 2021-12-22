@@ -6,6 +6,7 @@ export class TicketAPI extends API {
     super(`${apiUrl}/discord/ticket/`);
   }
 
+  //Allow String Param of Ticketid & Convert to Number
   async getOne(serverId: string, ticketId: number): Promise<TicketDto> {
     const url = this.getUrl();
     const updatedUrl = `${url}${serverId}/${ticketId}`;

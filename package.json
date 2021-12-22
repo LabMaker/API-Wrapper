@@ -3,7 +3,7 @@
     "node": ">=16.6.1"
   },
   "name": "labmaker-api-wrapper",
-  "version": "2.3.0",
+  "version": "2.3.7",
   "description": "",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",

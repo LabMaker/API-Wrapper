@@ -1,6 +1,7 @@
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import * as dotenv from 'dotenv';
 import { urlToHttpOptions } from 'url';
+import LabmakerAPI from '..';
 import { APIOptions } from '../types';
 import { refreshToken } from './refreshToken';
 
@@ -15,7 +16,7 @@ enum Methods {
 
 export class API {
   static accessToken = '';
-  static options: APIOptions = { debug: false };
+  static options: APIOptions = { debug: false, logFullErr: false };
   constructor(private APIUrl: string) {}
 
   protected getUrl() {
@@ -28,6 +29,13 @@ export class API {
     console.log(`Sending a ${type} Request to ${url}`);
   }
 
+  private LogError(err: any, type: Methods, endpoint: string) {
+    console.error(`${type} ${err.message} at ${endpoint}`);
+    if (!API.options.logFullErr) return;
+
+    console.log(err.toJSON());
+  }
+
   protected async get(url?: string): Promise<any> {
     const endpoint = url ? url : this.APIUrl;
 
@@ -35,8 +43,7 @@ export class API {
       this.LogCalls(endpoint, Methods.Get);
       return (await axios.get(endpoint)).data;
     } catch (err: any) {
-      console.error(`${Methods.Get} ${err.message} at ${endpoint}`);
-      return null;
+      return this.LogError(err, Methods.Get, endpoint);
     }
   }
 
@@ -47,8 +54,7 @@ export class API {
       this.LogCalls(endpoint, Methods.Post);
       return (await axios.post(endpoint, options)).data;
     } catch (err: any) {
-      console.error(`${Methods.Post} ${err.message} at ${endpoint}`);
-      return null;
+      return this.LogError(err, Methods.Post, endpoint);
     }
   }
 
@@ -59,8 +65,7 @@ export class API {
       this.LogCalls(endpoint, Methods.Put);
       return (await axios.put(endpoint, options)).data;
     } catch (err: any) {
-      console.error(`${Methods.Put} ${err.message} at ${endpoint}`);
-      return null;
+      return this.LogError(err, Methods.Put, endpoint);
     }
   }
 
@@ -71,8 +76,7 @@ export class API {
       this.LogCalls(endpoint, Methods.Delete);
       return (await axios.delete(endpoint, { data: options })).data;
     } catch (err: any) {
-      console.error(`${Methods.Delete} ${err.message} at ${endpoint}`);
-      return null;
+      return this.LogError(err, Methods.Delete, endpoint);
     }
   }
 }
@@ -96,6 +100,7 @@ axios.interceptors.response.use(
       return Promise.reject(err);
     } else if (err.response.status === 401) {
       originalRequest._retry = true;
+
       await refreshToken('http://localhost:3000/auth/refresh_token');
       return axios(originalRequest);
     }

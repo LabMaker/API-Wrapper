@@ -23,7 +23,7 @@ export type PaymentDto = {
 
 export type TicketDto = {
   id: number;
-  ticketId: string;
+  ticketId: number;
   serverId: string;
   channelId: string;
   type: string;
@@ -85,4 +85,5 @@ export type Guild = {
 
 export type APIOptions = {
   debug?: boolean;
+  logFullErr?: boolean;
 };

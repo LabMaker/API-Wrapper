@@ -17,6 +17,17 @@ export class RedditConfigAPI extends API {
   }
 
   async create(createConfigDto: RedditConfigDto): Promise<RedditConfigDto> {
+    //Have to add this check as you cant give defautl values for arrays in Prisma
+    if (!createConfigDto.blockedUsers) {
+      createConfigDto.blockedUsers = [];
+    }
+    if (!createConfigDto.forbiddenWords) {
+      createConfigDto.forbiddenWords = [];
+    }
+    if (!createConfigDto.subreddits) {
+      createConfigDto.forbiddenWords = [];
+    }
+
     return await this.post(createConfigDto);
   }
 

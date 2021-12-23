@@ -23,17 +23,23 @@ export class API {
     return this.APIUrl;
   }
 
-  private LogCalls(url: string, type: Methods) {
+  private LogCalls(url: string, type: Methods, options?: any) {
     if (!API.options.debug) return;
 
-    console.log(`Sending a ${type} Request to ${url}`);
+    console.log(
+      `Sending a ${type} Request to ${url} with ${JSON.stringify(options)}`
+    );
   }
 
   private LogError(err: any, type: Methods, endpoint: string) {
     console.error(`${type} ${err.message} at ${endpoint}`);
     if (!API.options.logFullErr) return;
 
-    console.log(err.toJSON());
+    try {
+      console.log(err.toJSON());
+    } catch {
+      console.log(err);
+    }
   }
 
   protected async get(url?: string): Promise<any> {
@@ -51,7 +57,7 @@ export class API {
     const endpoint = url ? url : this.APIUrl;
 
     try {
-      this.LogCalls(endpoint, Methods.Post);
+      this.LogCalls(endpoint, Methods.Post, options);
       return (await axios.post(endpoint, options)).data;
     } catch (err: any) {
       return this.LogError(err, Methods.Post, endpoint);

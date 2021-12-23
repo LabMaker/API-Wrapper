@@ -36,14 +36,14 @@ export class DiscordConfigAPI extends API {
     const url =
       this.getUrl().substring(0, this.getUrl().length - 7) + 'payment/';
 
-    return await this.post({ payments: payments }, url);
+    return await this.post({ payments }, url);
   }
 
   async updatePayments(payments: PaymentDto[]): Promise<PaymentDto[] | any> {
     const url =
       this.getUrl().substring(0, this.getUrl().length - 7) + 'payment/';
 
-    return await this.put(payments, url);
+    return await this.put({ payments }, url);
   }
 
   async deletePayments(paymentId: number[]): Promise<PaymentDto[] | any> {

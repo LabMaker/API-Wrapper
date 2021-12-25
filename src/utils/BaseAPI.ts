@@ -109,8 +109,12 @@ axios.interceptors.response.use(
 
     if (err.response.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
-      const token = await refreshToken(`${API.gAPIURL}/auth/refresh_token`);
-      axios.defaults.headers.common['Authorization'] = 'Bearer ' + token;
+      const res = await refreshToken(`${API.gAPIURL}/auth/refresh_token`);
+      if (res.ok) {
+        axios.defaults.headers.common['Authorization'] =
+          'Bearer ' + res.accessToken;
+      }
+
       return axios(originalRequest);
     }
 

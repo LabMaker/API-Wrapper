@@ -21,6 +21,34 @@ export type PaymentDto = {
   deletedPayment?: boolean;
 };
 
+export type CreateOrderDto = {
+  /**
+   * Channel ID to ticket relating to payment.
+   */
+  channelId: string;
+
+  /**
+   * URL to checkout.
+   */
+  url: string;
+
+  /**
+   * Payment breakdown (fees, gross, net profit)
+   */
+  breakdown: CreateOrderBreakdownDto;
+};
+
+export type CreateOrderBreakdownDto = {
+  fee: CreateOrderBreakdownAmountDto;
+  gross: CreateOrderBreakdownAmountDto;
+  net: CreateOrderBreakdownAmountDto;
+};
+
+export type CreateOrderBreakdownAmountDto = {
+  value: string;
+  currencyCode: string;
+};
+
 export type TicketDto = {
   id: number;
   ticketId: number;

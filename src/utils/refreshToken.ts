@@ -13,7 +13,7 @@ export const refreshToken = async (url: string) => {
 
   try {
     const data = (await transport.post(url)).data;
-    API.accessToken = data.accessToken;
+    API._accessToken = data.accessToken;
     // if (!data.ok) {
     //   throw new Error('Unable to Refresh Token');
     // }

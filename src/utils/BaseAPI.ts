@@ -13,11 +13,23 @@ enum Methods {
 }
 
 export class API {
-  static accessToken = '';
+  static _accessToken = '';
   static options: APIOptions = { debug: false, logFullErr: false };
   static gAPIURL: string; //Global Access (Maybe Move LAter?)
   constructor(private APIUrl: string) {
     API.gAPIURL = this.APIUrl;
+  }
+
+  public static setAccessToken(s: string) {
+    if (!s) return;
+
+    API._accessToken = s;
+  }
+
+  public static get accessToken() {
+    if (!this._accessToken) throw new Error('Access token not defined!');
+
+    return `Bearer ${API._accessToken}`;
   }
 
   protected getUrl() {
@@ -93,7 +105,7 @@ export class API {
 }
 
 axios.interceptors.request.use((req) => {
-  req.headers.authorization = `Bearer ${API.accessToken}`;
+  req.headers.authorization = API.accessToken;
   return req;
 });
 

@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { error } from 'console';
 import { API } from './BaseAPI';
 
 export const refreshToken = async (url: string) => {
@@ -13,7 +14,10 @@ export const refreshToken = async (url: string) => {
   try {
     const data = (await transport.post(url)).data;
     API.accessToken = data.accessToken;
-    return data;
+    if (!data.ok) {
+      throw new Error('Unable to Refresh Token');
+    }
+    return data.accessToken;
   } catch (err: any) {
     console.error(err.message);
     return null;

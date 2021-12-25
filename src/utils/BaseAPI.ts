@@ -15,7 +15,10 @@ enum Methods {
 export class API {
   static accessToken = '';
   static options: APIOptions = { debug: false, logFullErr: false };
-  constructor(private APIUrl: string) {}
+  static gAPIURL: string; //Global Access (Maybe Move LAter?)
+  constructor(private APIUrl: string) {
+    API.gAPIURL = this.APIUrl;
+  }
 
   protected getUrl() {
     return this.APIUrl;
@@ -102,14 +105,12 @@ axios.interceptors.response.use(
   },
   async (err) => {
     const originalRequest = err.config;
-    const refreshExpired = originalRequest.url.includes('auth/refresh_token');
+    // const refreshExpired = originalRequest.url.includes('auth/refresh_token');
 
-    if (err.response.status === 401 && refreshExpired) {
-      return Promise.reject(err);
-    } else if (err.response.status === 401) {
+    if (err.response.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
-
-      await refreshToken('http://localhost:3000/auth/refresh_token');
+      const token = await refreshToken(`${API.gAPIURL}/auth/refresh_token`);
+      axios.defaults.headers.common['Authorization'] = 'Bearer ' + token;
       return axios(originalRequest);
     }
 

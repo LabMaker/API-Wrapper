@@ -1,6 +1,6 @@
 import axios from 'axios';
 import * as dotenv from 'dotenv';
-import { urlToHttpOptions } from 'url';
+import LabmakerAPI from '..';
 import { APIOptions } from '../types';
 import { refreshToken } from './refreshToken';
 
@@ -14,9 +14,21 @@ enum Methods {
 }
 
 export class API {
-  static accessToken = '';
+  static _accessToken = '';
   static options: APIOptions = { debug: false };
   constructor(private APIUrl: string) {}
+
+  public static setAccessToken(s: string) {
+    if (!s) return;
+
+    API._accessToken = s;
+  }
+
+  public static get accessToken() {
+    if (!this._accessToken) throw new Error('Access token not defined!');
+
+    return `Bearer ${API._accessToken}`;
+  }
 
   protected getUrl() {
     return this.APIUrl;
@@ -78,7 +90,7 @@ export class API {
 }
 
 axios.interceptors.request.use((req) => {
-  req.headers.authorization = `Bearer ${API.accessToken}`;
+  req.headers.authorization = API.accessToken;
   return req;
 });
 

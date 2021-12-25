@@ -48,9 +48,11 @@ export default class LabmakerAPI {
   }
 
   public setAccessToken(s: string) {
-    if (!s) return;
+    API.setAccessToken(s);
+  }
 
-    API.accessToken = s;
+  public get accessToken() {
+    return API.accessToken;
   }
 
   public async fetchUserAvatar(s: string) {

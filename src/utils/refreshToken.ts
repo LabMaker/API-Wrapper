@@ -12,9 +12,9 @@ export const refreshToken = async (url: string) => {
 
   try {
     const data = (await transport.post(url)).data;
-    API.accessToken = data.accessToken;
+    API._accessToken = data.accessToken;
     return data;
-  } catch (err) {
+  } catch (err: any) {
     console.error(err.message);
     return null;
   }

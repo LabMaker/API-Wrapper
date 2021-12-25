@@ -1,21 +1,22 @@
 export type GuildConfigDto = {
-  _id: string;
+  id: string;
   name: string;
-  icon: string | null;
-  paymentConfigId: string;
+  icon?: string;
   prefix: string;
   embedImageUrl: string;
   autoSwitcher: boolean;
   autoTicket: boolean;
   autoReact: boolean;
+  paymentConfigId: string;
+  tickets?: TicketDto[];
 };
 
 export type PaymentDto = {
-  _id?: string;
-  serverId: string;
+  id?: number;
   name: string;
   value: string;
   type: string;
+  serverId: string;
   newPayment?: boolean;
   deletedPayment?: boolean;
 };
@@ -49,8 +50,8 @@ export type CreateOrderBreakdownAmountDto = {
 };
 
 export type TicketDto = {
-  _id: string;
-  ticketId: string;
+  id: number;
+  ticketId: number;
   serverId: string;
   channelId: string;
   type: string;
@@ -59,10 +60,11 @@ export type TicketDto = {
   level: string;
   budget: string;
   submitted: boolean;
+  discordConfig?: GuildConfigDto;
 };
 
 export type RedditConfigDto = {
-  _id: string;
+  id: number;
   clientId: string;
   clientSecret: string;
   username: string;
@@ -70,29 +72,35 @@ export type RedditConfigDto = {
   userAgent: string;
   title: string;
   pmBody: string;
-  delay: number;
   subreddits: string[];
   forbiddenWords: string[];
   blockedUsers: string[];
+  userId: string;
+  nodeEditors: string[];
+  creator?: UserDto;
+  logs?: LogDto[];
+  delay: number;
 };
 
 export type LogDto = {
-  _id: string;
-  nodeId: string;
+  id: number;
+  nodeId: number;
   message: string;
   subId: string;
   username: string;
   subreddit: string;
   createdAt?: string;
   pm: boolean;
+  redditConfig?: RedditConfigDto[];
 };
 
 export type UserDto = {
-  _id: string;
+  id: string;
   username: string;
   discriminator: string;
-  avatar: string | null;
-  nodes: string[];
+  avatar?: string;
+  nodes: RedditConfigDto[];
+  editableNodes: number[];
 };
 
 export type Guild = {
@@ -107,4 +115,6 @@ export type Guild = {
 
 export type APIOptions = {
   debug?: boolean;
+  logFullErr?: boolean;
+  logObject?: boolean;
 };

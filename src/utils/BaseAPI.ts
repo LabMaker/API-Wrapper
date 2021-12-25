@@ -1,6 +1,5 @@
 import axios from 'axios';
 import * as dotenv from 'dotenv';
-import LabmakerAPI from '..';
 import { APIOptions } from '../types';
 import { refreshToken } from './refreshToken';
 
@@ -15,8 +14,11 @@ enum Methods {
 
 export class API {
   static _accessToken = '';
-  static options: APIOptions = { debug: false };
-  constructor(private APIUrl: string) {}
+  static options: APIOptions = { debug: false, logFullErr: false };
+  static gAPIURL: string; //Global Access (Maybe Move LAter?)
+  constructor(private APIUrl: string) {
+    API.gAPIURL = this.APIUrl;
+  }
 
   public static setAccessToken(s: string) {
     if (!s) return;
@@ -34,10 +36,27 @@ export class API {
     return this.APIUrl;
   }
 
-  private LogCalls(url: string, type: Methods) {
+  private LogCalls(url: string, type: Methods, options?: any) {
     if (!API.options.debug) return;
 
-    console.log(`Sending a ${type} Request to ${url}`);
+    if (!API.options.logFullErr || !options || options === undefined) {
+      console.log(`Sending a ${type} Request to ${url}`);
+    } else {
+      console.log(
+        `Sending a ${type} Request to ${url} with ${JSON.stringify(options)}`
+      );
+    }
+  }
+
+  private LogError(err: any, type: Methods, endpoint: string) {
+    console.error(`${type} ${err.message} at ${endpoint}`);
+    if (!API.options.logFullErr) return;
+
+    try {
+      console.log(err.toJSON());
+    } catch {
+      console.log(err);
+    }
   }
 
   protected async get(url?: string): Promise<any> {
@@ -47,8 +66,7 @@ export class API {
       this.LogCalls(endpoint, Methods.Get);
       return (await axios.get(endpoint)).data;
     } catch (err: any) {
-      console.error(`${Methods.Get} ${err.message} at ${endpoint}`);
-      return null;
+      return this.LogError(err, Methods.Get, endpoint);
     }
   }
 
@@ -56,11 +74,10 @@ export class API {
     const endpoint = url ? url : this.APIUrl;
 
     try {
-      this.LogCalls(endpoint, Methods.Post);
+      this.LogCalls(endpoint, Methods.Post, options);
       return (await axios.post(endpoint, options)).data;
     } catch (err: any) {
-      console.error(`${Methods.Post} ${err.message} at ${endpoint}`);
-      return null;
+      return this.LogError(err, Methods.Post, endpoint);
     }
   }
 
@@ -71,8 +88,7 @@ export class API {
       this.LogCalls(endpoint, Methods.Put);
       return (await axios.put(endpoint, options)).data;
     } catch (err: any) {
-      console.error(`${Methods.Put} ${err.message} at ${endpoint}`);
-      return null;
+      return this.LogError(err, Methods.Put, endpoint);
     }
   }
 
@@ -83,8 +99,7 @@ export class API {
       this.LogCalls(endpoint, Methods.Delete);
       return (await axios.delete(endpoint, { data: options })).data;
     } catch (err: any) {
-      console.error(`${Methods.Delete} ${err.message} at ${endpoint}`);
-      return null;
+      return this.LogError(err, Methods.Delete, endpoint);
     }
   }
 }
@@ -102,13 +117,16 @@ axios.interceptors.response.use(
   },
   async (err) => {
     const originalRequest = err.config;
-    const refreshExpired = originalRequest.url.includes('auth/refresh_token');
+    // const refreshExpired = originalRequest.url.includes('auth/refresh_token');
 
-    if (err.response.status === 401 && refreshExpired) {
-      return Promise.reject(err);
-    } else if (err.response.status === 401) {
+    if (err.response.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
-      await refreshToken('http://localhost:3000/auth/refresh_token');
+      const res = await refreshToken(`${API.gAPIURL}/auth/refresh_token`);
+      if (res.ok) {
+        axios.defaults.headers.common['Authorization'] =
+          'Bearer ' + res.accessToken;
+      }
+
       return axios(originalRequest);
     }
 

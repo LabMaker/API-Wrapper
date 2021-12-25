@@ -1,5 +1,5 @@
 import { API } from './utils/BaseAPI';
-import { Guild, LogDto, RedditConfigDto } from './types';
+import { Guild } from './types';
 
 export class GuildsAPI extends API {
   constructor(apiUrl: string) {

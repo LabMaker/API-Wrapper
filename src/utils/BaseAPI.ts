@@ -24,9 +24,13 @@ export class API {
   private LogCalls(url: string, type: Methods, options?: any) {
     if (!API.options.debug) return;
 
-    console.log(
-      `Sending a ${type} Request to ${url} with ${JSON.stringify(options)}`
-    );
+    if (!API.options.logFullErr || !options || options === undefined) {
+      console.log(`Sending a ${type} Request to ${url}`);
+    } else {
+      console.log(
+        `Sending a ${type} Request to ${url} with ${JSON.stringify(options)}`
+      );
+    }
   }
 
   private LogError(err: any, type: Methods, endpoint: string) {

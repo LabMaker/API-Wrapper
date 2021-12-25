@@ -88,4 +88,5 @@ export type Guild = {
 export type APIOptions = {
   debug?: boolean;
   logFullErr?: boolean;
+  logObject?: boolean;
 };

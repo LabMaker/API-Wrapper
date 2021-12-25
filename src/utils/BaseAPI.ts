@@ -1,7 +1,5 @@
-import axios, { AxiosError } from 'axios';
+import axios from 'axios';
 import * as dotenv from 'dotenv';
-import { urlToHttpOptions } from 'url';
-import LabmakerAPI from '..';
 import { APIOptions } from '../types';
 import { refreshToken } from './refreshToken';
 

@@ -48,6 +48,7 @@ export type RedditConfigDto = {
   forbiddenWords: string[];
   blockedUsers: string[];
   userId: string;
+  nodeEditors: string[];
   creator?: UserDto;
   logs?: LogDto[];
   delay: number;
@@ -71,6 +72,7 @@ export type UserDto = {
   discriminator: string;
   avatar?: string;
   nodes: RedditConfigDto[];
+  editableNodes: number[];
 };
 
 export type Guild = {
